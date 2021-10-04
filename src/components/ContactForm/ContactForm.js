@@ -1,7 +1,41 @@
 import React, { Component } from "react";
 // import shortid from "shortid";
 
-class ContactForm extends Component {}
+class ContactForm extends Component {
+  state = {
+    name: "",
+    number: "",
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    // const { name, number } = e.currentTarget;
+
+    // this.setState({ [name]: number });
+    // this.props.
+  };
+
+  render() {
+    return (
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name
+            <input type="text" name="name" title="" />
+          </label>
+
+          <label>
+            Number
+            <input type="tel" name="number" title="" />
+          </label>
+
+          <button type="submit">Add contact</button>
+        </form>
+      </>
+    );
+  }
+}
 
 export default ContactForm;
 

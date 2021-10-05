@@ -3,6 +3,8 @@ import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
 
+// import shortid from "shortid";
+
 class App extends Component {
   state = {
     contacts: [
@@ -14,20 +16,46 @@ class App extends Component {
     filter: "",
   };
 
-  addContact = (text) => {
-    console.log(text);
+  addContact = (person) => {
+    // const contact = {
+    //   id: shortid.generate(),
+    //   name,
+    //   number,
+    // };
+    // this.setState((prevState) => ({
+    //   contacts: [contact, ...prevState.contacts],
+    // }));
+  };
+
+  submitForm = (e) => {
+    console.log(e);
+  };
+
+  changeFilter = (e) => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  getVisibleContacts = () => {
+    const normalizedFilter = this.state.filter.toLowerCase();
+
+    return this.state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
   };
 
   render() {
     // const { name, number } = this.state.contacts;
+
+    const visibleContacts = this.getVisibleContacts();
+
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm onSubmit={this.submitForm} />
 
         <h2>Contacts</h2>
-        <Filter />
-        <ContactList contacts={this.state.contacts} />
+        <Filter value={this.state.filter} onChange={this.changeFilter} />
+        <ContactList contacts={visibleContacts} />
       </div>
     );
   }

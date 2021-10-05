@@ -3,6 +3,8 @@ import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
 
+// ========== ID =========== //
+import { v4 as uuidv4 } from "uuid";
 // import shortid from "shortid";
 
 class App extends Component {
@@ -16,19 +18,31 @@ class App extends Component {
     filter: "",
   };
 
-  addContact = (person) => {
-    // const contact = {
-    //   id: shortid.generate(),
-    //   name,
-    //   number,
-    // };
-    // this.setState((prevState) => ({
-    //   contacts: [contact, ...prevState.contacts],
-    // }));
+  addContact = ({ name, number }) => {
+    const person = {
+      id: uuidv4(),
+      name,
+      number,
+    };
+
+    if (
+      this.state.contacts.some(
+        (contact) => contact.name.toLowerCase() === person.name.toLowerCase()
+      )
+    ) {
+      alert("This contact is already exist!! Try one more time, please!");
+      return;
+    }
+
+    this.setState((prevState) => ({
+      contacts: [person, ...prevState.contacts],
+    }));
   };
 
-  submitForm = (e) => {
-    console.log(e);
+  deleteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== id),
+    }));
   };
 
   changeFilter = (e) => {
@@ -44,18 +58,19 @@ class App extends Component {
   };
 
   render() {
-    // const { name, number } = this.state.contacts;
-
     const visibleContacts = this.getVisibleContacts();
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.submitForm} />
+        <ContactForm onSubmit={this.addContact} />
 
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <ContactList contacts={visibleContacts} />
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }

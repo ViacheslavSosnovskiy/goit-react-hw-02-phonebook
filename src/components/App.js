@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
+import s from "./App.module.css";
 
 // ========== ID =========== //
 import { v4 as uuidv4 } from "uuid";
@@ -61,7 +62,7 @@ class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div>
+      <div className={s.container}>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
 

@@ -1,0 +1,9 @@
+/* @import "./styles/shared.scss";
+
+// без SASS_PATH делали пути так
+// ../../styles/shared.scss */
+
+.label {
+  display: flex;
+  margin-bottom: 20px;
+}

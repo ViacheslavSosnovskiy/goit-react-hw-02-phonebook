@@ -35,6 +35,8 @@ class ContactForm extends Component {
           <label className={s.label}>
             Name
             <input
+              maxlength="22"
+              className={s.input}
               type="text"
               name="name"
               value={this.state.name}
@@ -48,6 +50,7 @@ class ContactForm extends Component {
           <label className={s.label}>
             Number
             <input
+              className={s.input}
               type="tel"
               name="number"
               value={this.state.number}
@@ -58,7 +61,9 @@ class ContactForm extends Component {
             />
           </label>
 
-          <button type="submit">Add contact</button>
+          <button type="submit" className={s.button}>
+            Add contact
+          </button>
         </form>
       </>
     );

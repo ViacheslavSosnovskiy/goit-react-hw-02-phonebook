@@ -15,6 +15,8 @@ class App extends Component {
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+      { id: "id-5", name: "Kate Yeland", number: "234-01-29" },
+      { id: "id-6", name: "Olex Bond", number: "456-87-54" },
     ],
     filter: "",
   };
@@ -68,10 +70,12 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        <div className={s.wrapper}>
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        </div>
       </div>
     );
   }

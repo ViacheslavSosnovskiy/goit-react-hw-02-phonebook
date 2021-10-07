@@ -1,9 +1,13 @@
+import s from "./contact.module.css";
+
 const Item = ({ id, name, number, onDeleteContact }) => {
   return (
-    <li>
-      <p>{name}:</p>
+    <li className={s.item}>
+      <p className={s.name}>{name}</p>
       <p>{number}</p>
-      <button onClick={() => onDeleteContact(id)}>Delete</button>
+      <button className={s.button} onClick={() => onDeleteContact(id)}>
+        Delete
+      </button>
     </li>
   );
 };
